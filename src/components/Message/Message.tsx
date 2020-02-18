@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import {
+  View, Image,
+  TouchableOpacity, Text,
+  LayoutAnimation,
+} from 'react-native';
 import moment from 'moment';
 
 import Display from '../UIKit/Display';
 import TextBubble from '../TextBubble/TextBubble';
 import Avatar from '../Avatar/Avatar';
+import styles from './styles';
 
 type Props = {
   message: Object;
@@ -24,7 +29,9 @@ class Message extends Component<Props, State> {
   }
 
   toggleTimeStamp = () => {
-    this.setState(state => ({ showTimeStamp: !!state.showTimeStamp }))
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+
+    this.setState(state => ({ showTimeStamp: !state.showTimeStamp }))
   }
 
   getTimeStamp = () => {
@@ -33,11 +40,7 @@ class Message extends Component<Props, State> {
     const date = moment(createdAt).format('M/D/YY');
     const time = moment(createdAt).format('LT');
 
-    if (today === date){
-      return time;
-    }
-
-    return `${date} at ${time}`;
+    return today === date ? time : `${date} at ${time}`;
   }
 
   render(){
@@ -76,9 +79,9 @@ class Message extends Component<Props, State> {
             <Avatar height={20} source={conversation.user.avatarSrc} />
           </Display>
         </TouchableOpacity>
-        {/* <Display when={showTimeStamp}>
-          <Text>{this.getTimeStamp()}</Text>
-        </Display> */}
+        <Display when={showTimeStamp}>
+          <Text style={styles.TimeStamp}>{`${this.getTimeStamp()}  •  ${message.status}`}</Text>
+        </Display>
       </View>
     );
   };

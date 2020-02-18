@@ -7,10 +7,11 @@ type Props = {
   placeholder: String;
   onChangeText: Function;
   onPress: Function;
+  style: Object;
 }
 
-const UserInput = ({ value, placeholder, onChangeText, onPress}: Props) => (
-  <View style={styles.UserInput}>
+const UserInput = ({ value, placeholder, onChangeText, onPress, style }: Props) => (
+  <View style={[ styles.UserInput, style ]}>
     <TextInput
       style={styles.TextInput}
       value={value}
