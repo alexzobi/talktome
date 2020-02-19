@@ -1,6 +1,6 @@
 type Props = {
   when: Boolean;
-  children: Element;
+  children: ChildNode;
 };
 
 const Display = ({ when, children }: Props) => (when ? children : false);

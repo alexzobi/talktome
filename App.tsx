@@ -16,6 +16,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import NetInfoMonitor from './src/components/NetInfoMonitor/NetInfoMonitor';
 import Conversation from './src/pages/Conversation/Conversation';
+import Login from './src/pages/Login/Login';
 import { store, persistor } from './src/store/store';
 
 const Stack = createStackNavigator();
@@ -27,8 +28,9 @@ const App = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={Conversation} />
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Conversation" component={Conversation} />
           </Stack.Navigator>
         </NavigationContainer>
         <NetInfoMonitor />
